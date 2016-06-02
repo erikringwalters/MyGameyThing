@@ -14,11 +14,12 @@ namespace MyGameyThing
             Dead
             
         }
-public class Player
+
+    public class Player
     {
       
-        static public int ratsKilled = 0;
-        static public int skeletonsKilled = 0;
+        public int ratsKilled = 0;
+        public int skeletonsKilled = 0;
         public void KillRat()
         {
             ratsKilled++;
@@ -33,10 +34,15 @@ public class Player
         }
         private Status GetStatus()
         {
+            if (skeletonsKilled >= 20)
+            {
+                return Status.LevelThree;
+            }
             if (ratsKilled >= 20)
             {
                 return Status.LevelTwo;
             }
+        
             //if (ratsKilled < 20)
             //{
             //    return Status.LevelOne;
