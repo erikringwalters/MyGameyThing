@@ -89,6 +89,15 @@ namespace MyGameyThing
                     break;
             }
             return message;
+
+        }
+        public void SaveGame()
+        {
+        
+        }
+        public void LoadGame()
+        {
+
         }
     }
 }

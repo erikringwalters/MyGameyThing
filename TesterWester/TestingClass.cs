@@ -35,7 +35,7 @@ namespace TesterWester
             }
             twoTest.KillSkeleton();
             Assert.IsTrue(twoTest.GetReport().Status == Status.LevelTwo);
-        }   
+        }
         [TestMethod]
         public void LevelOneTest()
         {
@@ -51,7 +51,7 @@ namespace TesterWester
             {
                 secondOneTest.KillRat();
             }
-           
+
             Assert.IsFalse(secondOneTest.GetReport().Status == Status.LevelOne);
         }
         [TestMethod]
@@ -68,5 +68,20 @@ namespace TesterWester
             }
             Assert.IsTrue(levelThreeTest.GetReport().Status == Status.LevelThree);
         }
+        [TestMethod]
+        public void SaveTest()
+        {
+            Player saverTest = new Player();
+            for (int ii = 0; ii < 20; ii++)
+            {
+                saverTest.KillRat();
+            }
+            for (int ii = 0; ii < 20; ii++)
+            {
+                saverTest.KillSkeleton();
+            }
+            saverTest.SaveGame();
+            Assert.IsTrue(saverTest.GetReport().Status == Status.LevelThree);
         }
+    }
 }
