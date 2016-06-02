@@ -72,16 +72,20 @@ namespace TesterWester
         public void SaveTest()
         {
             Player saverTest = new Player();
-            for (int ii = 0; ii < 20; ii++)
+            for (int ii = 0; ii < 19; ii++)
             {
                 saverTest.KillRat();
             }
-            for (int ii = 0; ii < 20; ii++)
-            {
-                saverTest.KillSkeleton();
-            }
             saverTest.SaveGame();
-            Assert.IsTrue(saverTest.GetReport().Status == Status.LevelThree);
+
+        }
+        [TestMethod]
+        public void LoadTest()
+        {
+            Player loaderTest = new Player();
+            loaderTest.LoadGame();
+            loaderTest.KillRat();
+            Assert.IsTrue(loaderTest.GetReport().Status == Status.LevelTwo);
         }
     }
 }
