@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,7 +19,7 @@ namespace MyGameyThing
 
     public class Player
     {
-      
+        public string Name { set; get; }
         public int ratsKilled = 0;
         public int skeletonsKilled = 0;
         public void KillRat()
@@ -91,12 +93,20 @@ namespace MyGameyThing
             return message;
 
         }
-        public void SaveGame()
+        public void Save()
         {
-        
+            // serialize and desalinize an object
+         
+            string jsonText = JsonConvert.SerializeObject(this); // to get text from object
+         
+            File.WriteAllText(@"C:/MyGameyThingData/" + this.Name + ".json", jsonText); // save
         }
-        public void LoadGame()
+       // var p = Player.Load("Erik");
+        public static Player Load(string playerName)
         {
+            var jsonText = File.ReadAllText(@"C:/MyGameyThingData/" + playerName + ".json"); // load
+            Player model = JsonConvert.DeserializeObject<Player>(jsonText); // to load object from text
+            return model;
 
         }
     }

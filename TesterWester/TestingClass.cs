@@ -76,16 +76,32 @@ namespace TesterWester
             {
                 saverTest.KillRat();
             }
-            saverTest.SaveGame();
-
+            saverTest.Name = "Erik";
+            saverTest.Save();
+            
         }
         [TestMethod]
         public void LoadTest()
         {
             Player loaderTest = new Player();
-            loaderTest.LoadGame();
+            loaderTest = Player.Load("Erik");
             loaderTest.KillRat();
             Assert.IsTrue(loaderTest.GetReport().Status == Status.LevelTwo);
+        }
+        [TestMethod]
+        public void SecondSaveTest()
+        {
+            Player saverTest = new Player();
+            for (int ii = 0; ii < 19; ii++)
+            {
+                saverTest.KillRat();
+            }
+            saverTest.Name = "John";
+            saverTest.Save();
+            var saverTestTwo = Player.Load("John");
+            Assert.IsTrue(saverTestTwo.GetReport().Status == Status.LevelOne);
+            saverTestTwo.KillRat();
+            Assert.IsTrue(saverTestTwo.GetReport().Status == Status.LevelTwo);
         }
     }
 }
