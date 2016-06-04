@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace MyGameyThing
 {
+
     public enum Status
         {
             LevelOne,
@@ -19,9 +20,14 @@ namespace MyGameyThing
 
     public class Player
     {
+
         public string Name { set; get; }
         public int ratsKilled = 0;
         public int skeletonsKilled = 0;
+        public Player(string name)
+        {
+            this.Name = name;
+        }
         public void KillRat()
         {
             ratsKilled++;
@@ -96,7 +102,10 @@ namespace MyGameyThing
         public void Save()
         {
             // serialize and desalinize an object
-         
+            if (string.IsNullOrWhiteSpace(this.Name))
+            {
+                throw new ApplicationException("Name cannot be blank."); 
+            }
             string jsonText = JsonConvert.SerializeObject(this); // to get text from object
          
             File.WriteAllText(@"C:/MyGameyThingData/" + this.Name + ".json", jsonText); // save

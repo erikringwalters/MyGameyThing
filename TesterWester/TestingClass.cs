@@ -17,7 +17,7 @@ namespace TesterWester
         [TestMethod]
         public void DeathTest()
         {
-            Player firstTest = new Player();
+            Player firstTest = new Player("Erik");
             for (int ii = 0; ii < 19; ii++)
             {
                 firstTest.KillRat();
@@ -28,7 +28,7 @@ namespace TesterWester
         [TestMethod]
         public void LevelTwoTest()
         {
-            Player twoTest = new Player();
+            Player twoTest = new Player("Erik");
             for (int ii = 0; ii < 20; ii++)
             {
                 twoTest.KillRat();
@@ -39,14 +39,14 @@ namespace TesterWester
         [TestMethod]
         public void LevelOneTest()
         {
-            Player oneTest = new Player();
+            Player oneTest = new Player("Erik");
             oneTest.KillRat();
             Assert.IsTrue(oneTest.GetReport().Status == Status.LevelOne);
         }
         [TestMethod]
         public void SecondLevelOneTest()
         {
-            Player secondOneTest = new Player();
+            Player secondOneTest = new Player("Erik");
             for (int ii = 0; ii < 20; ii++)
             {
                 secondOneTest.KillRat();
@@ -57,7 +57,7 @@ namespace TesterWester
         [TestMethod]
         public void ThreeTest()
         {
-            Player levelThreeTest = new Player();
+            Player levelThreeTest = new Player("Erik");
             for (int ii = 0; ii < 20; ii++)
             {
                 levelThreeTest.KillRat();
@@ -71,7 +71,7 @@ namespace TesterWester
         [TestMethod]
         public void SaveTest()
         {
-            Player saverTest = new Player();
+            Player saverTest = new Player("Erik");
             for (int ii = 0; ii < 19; ii++)
             {
                 saverTest.KillRat();
@@ -83,7 +83,7 @@ namespace TesterWester
         [TestMethod]
         public void LoadTest()
         {
-            Player loaderTest = new Player();
+            Player loaderTest = new Player("Erik");
             loaderTest = Player.Load("Erik");
             loaderTest.KillRat();
             Assert.IsTrue(loaderTest.GetReport().Status == Status.LevelTwo);
@@ -91,7 +91,7 @@ namespace TesterWester
         [TestMethod]
         public void SecondSaveTest()
         {
-            Player saverTest = new Player();
+            Player saverTest = new Player("Erik");
             for (int ii = 0; ii < 19; ii++)
             {
                 saverTest.KillRat();
