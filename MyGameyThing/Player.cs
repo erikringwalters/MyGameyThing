@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace MyGameyThing
 {
 
@@ -116,7 +117,7 @@ namespace MyGameyThing
             var jsonText = File.ReadAllText(@"C:/MyGameyThingData/" + playerName + ".json"); // load
             Player model = JsonConvert.DeserializeObject<Player>(jsonText); // to load object from text
             return model;
-
         }
+      
     }
 }

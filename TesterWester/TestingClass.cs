@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using MyGameyThing;
 
 namespace TesterWester
@@ -14,6 +7,7 @@ namespace TesterWester
     [TestClass]
     public class TestingClass
     {
+        private Random random;
         [TestMethod]
         public void DeathTest()
         {
@@ -25,6 +19,13 @@ namespace TesterWester
             firstTest.KillSkeleton();
             Assert.IsTrue(firstTest.GetReport().Status == Status.Dead);
         }
+
+        [TestInitialize]
+        public void Setup()
+        {
+             random = new Random();
+        }
+
         [TestMethod]
         public void LevelTwoTest()
         {
@@ -78,7 +79,7 @@ namespace TesterWester
             }
             saverTest.Name = "Erik";
             saverTest.Save();
-            
+
         }
         [TestMethod]
         public void LoadTest()
@@ -102,6 +103,46 @@ namespace TesterWester
             Assert.IsTrue(saverTestTwo.GetReport().Status == Status.LevelOne);
             saverTestTwo.KillRat();
             Assert.IsTrue(saverTestTwo.GetReport().Status == Status.LevelTwo);
+        }
+        private int RandomNumber()
+        {
+           
+            int randomValue = random.Next(1000, 9999);
+            return randomValue;
+        }
+        private Player RandomPlayer()
+        {
+            var killThisMany = new Random();
+            Player killTest = new Player("Player" + RandomNumber());
+            int randomValue = killThisMany.Next(0, 40);
+            for (int ii = 0; ii < randomValue; ii++)
+            {
+                killTest.KillRat();
+            }
+            if (randomValue >= 20)
+            {
+                randomValue = killThisMany.Next(0, 40);
+                for (int ii = 0; ii < randomValue; ii++)
+                {
+                    killTest.KillSkeleton();
+                }
+            }
+            return killTest;
+        }
+       
+        [TestMethod]
+        public void testRandomPlayer()
+        {
+            Player randomTwo = this.RandomPlayer();
+        }
+        [TestMethod]
+        public void testRandomPlayerTwoHundredTimes()
+        {
+            for (int ii = 0; ii < 200; ii++)
+            {
+                Player randomTwo = this.RandomPlayer();
+                randomTwo.Save();
+            }
         }
     }
 }
