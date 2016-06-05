@@ -144,5 +144,11 @@ namespace TesterWester
                 randomTwo.Save();
             }
         }
+        [TestMethod]
+        public void CheckingFiles()
+        {
+            LoadAndDelete files = new LoadAndDelete();
+            files.LoadAllPlayers();
+        }
     }
 }

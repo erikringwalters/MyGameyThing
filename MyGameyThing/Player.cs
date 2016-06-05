@@ -21,7 +21,7 @@ namespace MyGameyThing
 
     public class Player
     {
-
+       
         public string Name { set; get; }
         public int ratsKilled = 0;
         public int skeletonsKilled = 0;
@@ -37,10 +37,7 @@ namespace MyGameyThing
         {
             skeletonsKilled++;
         }
-        public void PlayerDies()
-        {
-            //Enter some ending code later here.
-        }
+       
         private Status GetStatus()
         {
             if (skeletonsKilled >= 20)
@@ -51,11 +48,6 @@ namespace MyGameyThing
             {
                 return Status.LevelTwo;
             }
-        
-            //if (ratsKilled < 20)
-            //{
-            //    return Status.LevelOne;
-            //}
             if (ratsKilled < 20 && skeletonsKilled > 0)
             {
                 return Status.Dead;
@@ -90,9 +82,7 @@ namespace MyGameyThing
                 case Status.LevelThree:
                     message += "You are level three!";
                     break;
-                //case Status.Other:
-                //    message += "Not sure what happened. (Other Status)";
-                //    break;
+              
                 default:
                     message += "Welcome to the game!";
                     break;
@@ -100,6 +90,14 @@ namespace MyGameyThing
             return message;
 
         }
+        public string GetGameDataPath()
+        {
+            return @"C:/MyGameyThingData/" + this.Name + ".json";
+        }
+        //public string GetGameDataPathPlayer()
+        //{
+        //    return @"C:/MyGameyThingData/" + playerName + ".json";
+        //}
         public void Save()
         {
             // serialize and desalinize an object
@@ -109,7 +107,7 @@ namespace MyGameyThing
             }
             string jsonText = JsonConvert.SerializeObject(this); // to get text from object
          
-            File.WriteAllText(@"C:/MyGameyThingData/" + this.Name + ".json", jsonText); // save
+            File.WriteAllText(GetGameDataPath(), jsonText); // save
         }
        // var p = Player.Load("Erik");
         public static Player Load(string playerName)
