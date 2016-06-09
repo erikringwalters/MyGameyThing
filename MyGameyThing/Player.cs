@@ -116,6 +116,18 @@ namespace MyGameyThing
             Player model = JsonConvert.DeserializeObject<Player>(jsonText); // to load object from text
             return model;
         }
-      
+        public void Delete()
+        {
+            System.IO.DirectoryInfo di = new DirectoryInfo(@"C:/MyGameyThingData");
+
+            foreach (FileInfo file in di.GetFiles())
+            {
+                file.Delete();
+            }
+            foreach (DirectoryInfo dir in di.GetDirectories())
+            {
+                dir.Delete(true);
+            }
+        }
     }
 }

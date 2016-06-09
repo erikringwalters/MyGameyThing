@@ -136,9 +136,9 @@ namespace TesterWester
             Player randomTwo = this.RandomPlayer();
         }
         [TestMethod]
-        public void testRandomPlayerTwoHundredTimes()
+        public void testRandomPlayerALotOfTimes()
         {
-            for (int ii = 0; ii < 200; ii++)
+            for (int ii = 0; ii < 9000; ii++)
             {
                 Player randomTwo = this.RandomPlayer();
                 randomTwo.Save();
@@ -147,8 +147,14 @@ namespace TesterWester
         [TestMethod]
         public void CheckingFiles()
         {
-            LoadAndDelete files = new LoadAndDelete();
+            FileManager files = new FileManager();
             files.LoadAllPlayers();
+        }
+        [TestMethod]
+        public void FilesDeleted()
+        {
+            FileManager delete = new FileManager();
+            delete.DeleteAllData();
         }
     }
 }

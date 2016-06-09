@@ -5,7 +5,7 @@ using System.IO;
 namespace MyGameyThing
 {
 
-    public class LoadAndDelete
+    public class FileManager
     {
         private Dictionary<string, Player> playerDictionary = new Dictionary<string, Player>();
         
@@ -23,7 +23,12 @@ namespace MyGameyThing
         }
         public void DeleteAllData()
         {
-
+            string filepath = @"C:/MyGameyThingData/";
+            DirectoryInfo d = new DirectoryInfo(filepath);
+            foreach (var file in d.GetFiles("*.json"))
+            {
+                file.Delete();
+            }
         }
     }
 }
