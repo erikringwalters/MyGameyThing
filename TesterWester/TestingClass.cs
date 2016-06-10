@@ -23,7 +23,9 @@ namespace TesterWester
         [TestInitialize]
         public void Setup()
         {
-             random = new Random();
+            random = new Random();
+            GameManager manager = new GameManager();
+            manager.DeleteAllData();
         }
 
         [TestMethod]
@@ -87,6 +89,7 @@ namespace TesterWester
         {
             GameManager manager = new GameManager();
             Player loaderTest = new Player("Erik");
+            SaveTest();
             loaderTest = manager.LoadPlayer("Erik");
             loaderTest.KillRat();
             Assert.IsTrue(loaderTest.GetReport().Status == Status.LevelTwo);
@@ -138,16 +141,17 @@ namespace TesterWester
         {
             Player randomTwo = this.RandomPlayer();
         }
-        [TestMethod]
-        public void testRandomPlayerALotOfTimes()
-        {
-            GameManager manager = new GameManager();
-            for (int ii = 0; ii < 100; ii++)
-            {
-                Player randomTwo = this.RandomPlayer();
-                manager.SavePlayer(randomTwo);
-            }
-        }
+        //[TestMethod]
+        //[Ignore]
+        //public void testRandomPlayerALotOfTimes()
+        //{
+        //    GameManager manager = new GameManager();
+        //    for (int ii = 0; ii < 100; ii++)
+        //    {
+        //        Player randomTwo = this.RandomPlayer();
+        //        manager.SavePlayer(randomTwo);
+        //    }
+        //}
         [TestMethod]
         public void CheckingFiles()
         {
@@ -173,6 +177,28 @@ namespace TesterWester
             Assert.IsNotNull(newPlayer);
             Assert.IsTrue(newPlayer.GetReport().Status == saverTest.GetReport().Status);
         }
-        
+        [TestMethod]
+        public void CheckThatPlayerAlreadyExists()
+        {
+            var isExceptionCaught = false;
+            GameManager manager = new GameManager();
+            manager.DeleteAllData();
+            Player checkIfThere = new Player("aRollingWheel");
+            checkIfThere.Name = "aRollingWheel";
+            manager.SavePlayer(checkIfThere);
+            try
+            {
+                GameManager managerTwo = new GameManager();
+                Player checkIfThereTwo = new Player("aRollingWheel");
+                checkIfThereTwo.Name = "aRollingWheel";
+                managerTwo.SavePlayer(checkIfThereTwo);
+            }
+            catch(Exception ex)
+            {
+                isExceptionCaught = true;
+            }
+            Assert.IsTrue(isExceptionCaught == true);
+            manager.DeleteAllData();
+        }
     }
 }

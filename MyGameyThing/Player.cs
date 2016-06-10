@@ -6,7 +6,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace MyGameyThing
 {
 
@@ -21,12 +20,18 @@ namespace MyGameyThing
 
     public class Player
     {
-       
+        
         public string Name { set; get; }
         public int ratsKilled = 0;
         public int skeletonsKilled = 0;
+        public bool IsNew { set; get; }
+        public Player()
+        {
+            IsNew = true;
+        }
         public Player(string name)
         {
+            IsNew = true;
             this.Name = name;
         }
         public void KillRat()
@@ -37,6 +42,7 @@ namespace MyGameyThing
         {
             skeletonsKilled++;
         }
+       
        
         private Status GetStatus()
         {
