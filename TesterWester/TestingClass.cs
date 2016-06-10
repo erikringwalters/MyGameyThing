@@ -72,34 +72,37 @@ namespace TesterWester
         [TestMethod]
         public void SaveTest()
         {
+            GameManager manager = new GameManager();
             Player saverTest = new Player("Erik");
             for (int ii = 0; ii < 19; ii++)
             {
                 saverTest.KillRat();
             }
             saverTest.Name = "Erik";
-            saverTest.Save();
+            manager.SavePlayer(saverTest);
 
         }
         [TestMethod]
         public void LoadTest()
         {
+            GameManager manager = new GameManager();
             Player loaderTest = new Player("Erik");
-            loaderTest = Player.Load("Erik");
+            loaderTest = manager.LoadPlayer("Erik");
             loaderTest.KillRat();
             Assert.IsTrue(loaderTest.GetReport().Status == Status.LevelTwo);
         }
         [TestMethod]
         public void SecondSaveTest()
         {
+            GameManager manager = new GameManager();
             Player saverTest = new Player("Erik");
             for (int ii = 0; ii < 19; ii++)
             {
                 saverTest.KillRat();
             }
             saverTest.Name = "John";
-            saverTest.Save();
-            var saverTestTwo = Player.Load("John");
+            manager.SavePlayer(saverTest);
+            var saverTestTwo = manager.LoadPlayer("John");
             Assert.IsTrue(saverTestTwo.GetReport().Status == Status.LevelOne);
             saverTestTwo.KillRat();
             Assert.IsTrue(saverTestTwo.GetReport().Status == Status.LevelTwo);
@@ -138,10 +141,11 @@ namespace TesterWester
         [TestMethod]
         public void testRandomPlayerALotOfTimes()
         {
-            for (int ii = 0; ii < 9000; ii++)
+            GameManager manager = new GameManager();
+            for (int ii = 0; ii < 100; ii++)
             {
                 Player randomTwo = this.RandomPlayer();
-                randomTwo.Save();
+                manager.SavePlayer(randomTwo);
             }
         }
         [TestMethod]
@@ -159,10 +163,10 @@ namespace TesterWester
         [TestMethod]
         public void CheckPlayerExistence()
         {
+            GameManager manager = new GameManager();
             Player saverTest = new Player("Erik");
             saverTest.Name = "Erik";
-            saverTest.Save();
-            GameManager manager = new GameManager();
+            manager.SavePlayer(saverTest);
             manager.LoadAllPlayers();
             Assert.IsTrue(manager.DoesPlayerExist("Erik"));
             var newPlayer = manager.GetPlayer("Erik");

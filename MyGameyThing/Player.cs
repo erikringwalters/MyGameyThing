@@ -95,7 +95,7 @@ namespace MyGameyThing
             return @"C:/MyGameyThingData/" + this.Name + ".json";
         }
     
-        public void Save()
+        internal void Save()
         {
             // serialize and desalinize an object
             if (string.IsNullOrWhiteSpace(this.Name))
@@ -106,7 +106,7 @@ namespace MyGameyThing
             File.WriteAllText(GetGameDataPath(), jsonText); // save
         }
        // var p = Player.Load("Erik");
-        public static Player Load(string playerName)
+        internal static Player Load(string playerName)
         {
             var jsonText = File.ReadAllText(@"C:/MyGameyThingData/" + playerName + ".json"); // load
             Player model = JsonConvert.DeserializeObject<Player>(jsonText); // to load object from text

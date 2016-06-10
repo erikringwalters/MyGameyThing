@@ -44,5 +44,13 @@ namespace MyGameyThing
                 return null;
             }
         }
+        public void SavePlayer(Player player)
+        {
+            player.Save();
+        }
+        public Player LoadPlayer(string playerName)
+        {
+           return Player.Load(playerName);
+        }
     }
 }
