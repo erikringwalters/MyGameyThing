@@ -5,10 +5,9 @@ using System.IO;
 namespace MyGameyThing
 {
 
-    public class FileManager
+    public class GameManager
     {
         private Dictionary<string, Player> playerDictionary = new Dictionary<string, Player>();
-        
         public void LoadAllPlayers()
         {
             string filepath = @"C:/MyGameyThingData/";
@@ -28,6 +27,21 @@ namespace MyGameyThing
             foreach (var file in d.GetFiles("*.json"))
             {
                 file.Delete();
+            }
+        }
+        public bool DoesPlayerExist(string playerName)
+        {
+            return playerDictionary.ContainsKey(playerName);
+        }
+        public Player GetPlayer(string playerName)
+        {
+            if(playerDictionary.ContainsKey(playerName))
+            {
+                return playerDictionary[playerName];
+            }
+            else
+            {
+                return null;
             }
         }
     }

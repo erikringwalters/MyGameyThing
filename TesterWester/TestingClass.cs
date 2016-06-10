@@ -147,14 +147,28 @@ namespace TesterWester
         [TestMethod]
         public void CheckingFiles()
         {
-            FileManager files = new FileManager();
+            GameManager files = new GameManager();
             files.LoadAllPlayers();
         }
         [TestMethod]
         public void FilesDeleted()
         {
-            FileManager delete = new FileManager();
+            GameManager delete = new GameManager();
             delete.DeleteAllData();
         }
+        [TestMethod]
+        public void CheckPlayerExistence()
+        {
+            Player saverTest = new Player("Erik");
+            saverTest.Name = "Erik";
+            saverTest.Save();
+            GameManager manager = new GameManager();
+            manager.LoadAllPlayers();
+            Assert.IsTrue(manager.DoesPlayerExist("Erik"));
+            var newPlayer = manager.GetPlayer("Erik");
+            Assert.IsNotNull(newPlayer);
+            Assert.IsTrue(newPlayer.GetReport().Status == saverTest.GetReport().Status);
+        }
+        
     }
 }

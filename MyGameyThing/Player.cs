@@ -94,10 +94,7 @@ namespace MyGameyThing
         {
             return @"C:/MyGameyThingData/" + this.Name + ".json";
         }
-        //public string GetGameDataPathPlayer()
-        //{
-        //    return @"C:/MyGameyThingData/" + playerName + ".json";
-        //}
+    
         public void Save()
         {
             // serialize and desalinize an object
@@ -106,7 +103,6 @@ namespace MyGameyThing
                 throw new ApplicationException("Name cannot be blank."); 
             }
             string jsonText = JsonConvert.SerializeObject(this); // to get text from object
-         
             File.WriteAllText(GetGameDataPath(), jsonText); // save
         }
        // var p = Player.Load("Erik");
